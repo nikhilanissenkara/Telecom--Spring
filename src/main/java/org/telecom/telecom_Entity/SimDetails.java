@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name="Sim_Details")
 public class SimDetails
 {
     @Id
@@ -15,15 +15,7 @@ public class SimDetails
     private Integer simId;
     private Long serviceNumber;
     private Long simNumber;
-    private String status;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        status = status;
-    }
+    private String simStatus;
 
     public Integer getSimId() {
         return simId;
@@ -33,26 +25,37 @@ public class SimDetails
         this.simId = simId;
     }
 
-    public long getServiceNumber() {
+    public Long getServiceNumber() {
         return serviceNumber;
     }
 
-    public void setServiceNumber(long serviceNumber) {
+    public void setServiceNumber(Long serviceNumber) {
         this.serviceNumber = serviceNumber;
     }
 
-    public long getSimNumber() {
+    public Long getSimNumber() {
         return simNumber;
     }
 
-    public void setSimNumber(long simNumber) {
+    public void setSimNumber(Long simNumber) {
         this.simNumber = simNumber;
+    }
+
+    public String getSimStatus() {
+        return simStatus;
+    }
+
+    public void setSimStatus(String simStatus) {
+        this.simStatus = simStatus;
     }
 
     @Override
     public String toString() {
-        return "{" +
-                "status='" + status + '\'' +
+        return "SimDetails{" +
+                "simId=" + simId +
+                ", serviceNumber=" + serviceNumber +
+                ", simNumber=" + simNumber +
+                ", simStatus='" + simStatus + '\'' +
                 '}';
     }
 }

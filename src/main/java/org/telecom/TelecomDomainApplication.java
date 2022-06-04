@@ -1,8 +1,7 @@
-package org.telecom.telecom_domain;
+package org.telecom;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.batch.BatchDataSourceScriptDatabaseInitializer;
 
 @SpringBootApplication
 public class TelecomDomainApplication {
