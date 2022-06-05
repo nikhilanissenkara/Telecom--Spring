@@ -12,6 +12,10 @@ public class SimDetailsResponse {
         this.simStatus = simStatus;
     }
 
+    public SimDetailsResponse(String simStatus) {
+        this.simStatus = simStatus;
+    }
+
     private Integer simId;
     private Long serviceNumber;
     private Long simNumber;

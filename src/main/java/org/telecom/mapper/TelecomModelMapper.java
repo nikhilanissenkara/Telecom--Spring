@@ -1,9 +1,9 @@
 package org.telecom.mapper;
 
-
 import org.telecom.telecomdto.request.SimDetailsRequest;
 import org.telecom.telecom_Entity.SimDetails;
 import org.telecom.telecomdto.response.SimDetailsResponse;
+
 
 public class TelecomModelMapper {
 
@@ -11,8 +11,8 @@ public class TelecomModelMapper {
         SimDetails simDetails = new SimDetails();
         simDetails.setSimStatus(simDetailsRequest.getSimStatus());
         simDetails.setSimNumber(simDetailsRequest.getSimNumber());
-        simDetails.setServiceNumber(simDetails.getServiceNumber());
-        simDetails.setSimId(simDetails.getSimId());
+        simDetails.setServiceNumber(simDetailsRequest.getServiceNumber());
+        simDetails.setSimId(simDetailsRequest.getSimId());
         return simDetails;
     }
 

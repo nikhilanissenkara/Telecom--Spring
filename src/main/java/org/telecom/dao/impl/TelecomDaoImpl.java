@@ -3,59 +3,62 @@ package org.telecom.dao.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.telecom.exception.TelecomException;
-import org.telecom.telecomdto.request.SimDetailsRequest;
 import org.telecom.dao.TelecomDao;
+import org.telecom.mapper.TelecomModelMapper;
 import org.telecom.telecom_Entity.SimDetails;
 import org.telecom.telecom_repository.TelecomRepository;
+import org.telecom.telecomdto.response.SimDetailsResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class TelecomDaoImpl implements TelecomDao {
     @Autowired
     private TelecomRepository telecomRepository;
 
+    private SimDetailsResponse simDetailsResponse;
+
     @Override
-    public String simStatus(SimDetails simDetails) {
-        SimDetails simDetailsEntity = telecomRepository.findBySimNumberAndServiceNumber(simDetails.getSimNumber(), simDetails.getServiceNumber());
-        return simDetailsEntity.getSimStatus();
+    public SimDetailsResponse simStatus(SimDetails simDetails) {
+        SimDetails simDetailsEntity = telecomRepository.findBySimNumberOrServiceNumber(simDetails.getSimNumber(), simDetails.getServiceNumber());
+        return new SimDetailsResponse(simDetailsEntity.getSimStatus());
     }
 
     @Override
-    public List<SimDetails> simDetails() {
-        return (List<SimDetails>) telecomRepository.findAll();
+    public List<SimDetailsResponse> simDetails() {
+        List<SimDetails> simDetailsList = (List<SimDetails>) telecomRepository.findAll();
+        TelecomModelMapper telecomModelMapper = new TelecomModelMapper();
+        List<SimDetailsResponse> simDetailsResponses = simDetailsList.stream().map(simDetails -> telecomModelMapper.converToResponse(simDetails)).collect(Collectors.toList());
+        return simDetailsResponses;
     }
 
     @Override
-    public SimDetails getSimDetail(Integer simId) throws TelecomException {
-        Optional<SimDetails> optional=telecomRepository.findById(simId);
-        SimDetails s = optional.orElseThrow(()-> new TelecomException("not found"));
-        return s;
+    public SimDetails getSimDetail(SimDetails simDetails) throws TelecomException {
+        Optional<SimDetails> optional=telecomRepository.findById(simDetails.getSimId());
+        SimDetails simDetailsEntity =optional.orElseThrow(()-> new TelecomException("not found"));
+        return simDetailsEntity;
     }
 
     @Override
-    public Integer addSim(TelecomDTO telecomDTO) {
-        SimDetails simEntity=new SimDetails();
-        simEntity.setSimId(telecomDTO.getSimId());
-        simEntity.setSimNumber(telecomDTO.getSimNumber());
-        simEntity.setServiceNumber(telecomDTO.getServiceNumber());
-        simEntity.setSimStatus(telecomDTO.getStatus());
-        SimDetails simEntity2 =telecomRepository.save(simEntity);
-        return simEntity2.getSimId();
+    public Integer addSim(SimDetails simDetails) {
+        SimDetails simEntity = telecomRepository.save(simDetails);
+        return simEntity.getSimId();
     }
 
     @Override
-    public void updateSim(Integer simId, String status) throws TelecomException {
-        Optional<SimDetails> optional = telecomRepository.findById(simId);
-        SimDetails simDetails = optional.orElseThrow(() -> new TelecomException("not found"));
-        simDetails.setSimStatus(status);
+    public void updateSim(SimDetails simDetails) throws TelecomException {
+        Optional<SimDetails> optional = telecomRepository.findById(simDetails.getSimId());
+        SimDetails simDetailsEntity = optional.orElseThrow(() -> new TelecomException("not found"));
+        simDetailsEntity.setSimStatus(simDetails.getSimStatus());
     }
 
     @Override
-    public void deleteSim(Integer simId) throws TelecomException {
-        Optional<SimDetails> optional=telecomRepository.findById(simId);
+    public void deleteSim(SimDetails simDetails) throws TelecomException {
+        Optional<SimDetails> optional=telecomRepository.findById(simDetails.getSimId());
         optional.orElseThrow(()->new TelecomException("Not Found"));
-        telecomRepository.deleteById(simId);
+        telecomRepository.deleteById(simDetails.getSimId());
     }
 }

@@ -7,6 +7,7 @@ import org.telecom.mapper.TelecomModelMapper;
 import org.telecom.telecomdto.request.SimDetailsRequest;
 import org.telecom.dao.TelecomDao;
 import org.telecom.telecom_Entity.SimDetails;
+import org.telecom.telecomdto.response.SimDetailsResponse;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -22,13 +23,13 @@ public class TelecomServiceImpl implements TelecomService {
     TelecomModelMapper telecomModelMapper =  new TelecomModelMapper();
 
     @Override
-    public String simStatus(SimDetailsRequest simDetailsRequest) {
+    public SimDetailsResponse simStatus(SimDetailsRequest simDetailsRequest) {
         SimDetails simDetails = telecomModelMapper.convertToEntity(simDetailsRequest);
         return daoImpl.simStatus(simDetails);
     }
 
     @Override
-    public List<SimDetails> simDetails() {
+    public List<SimDetailsResponse> simDetails() {
         return daoImpl.simDetails();
     }
 

@@ -2,10 +2,7 @@ package org.telecom.telecom_Entity;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name="Sim_Details")
 public class SimDetails
@@ -13,8 +10,12 @@ public class SimDetails
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer simId;
+
+    @Column(name = "service_Number")
     private Long serviceNumber;
+    @Column(name = "sim_number")
     private Long simNumber;
+    @Column(name = "sim_status")
     private String simStatus;
 
     public Integer getSimId() {

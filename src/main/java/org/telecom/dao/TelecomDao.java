@@ -1,17 +1,17 @@
 package org.telecom.dao;
 
 import org.telecom.exception.TelecomException;
-import org.telecom.telecomdto.request.SimDetailsRequest;
 import org.telecom.telecom_Entity.SimDetails;
+import org.telecom.telecomdto.response.SimDetailsResponse;
 
 import java.util.List;
 
 
 public interface TelecomDao {
 
-    String simStatus(SimDetails simDetails);
+    SimDetailsResponse simStatus(SimDetails simDetails);
 
-    List<SimDetails> simDetails();
+    List<SimDetailsResponse> simDetails();
 
     SimDetails getSimDetail(SimDetails simDetails) throws TelecomException;
 
