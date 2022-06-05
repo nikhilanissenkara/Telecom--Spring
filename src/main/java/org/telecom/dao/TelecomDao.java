@@ -13,11 +13,11 @@ public interface TelecomDao {
 
     List<SimDetailsResponse> simDetails();
 
-    SimDetails getSimDetail(SimDetails simDetails) throws TelecomException;
+    SimDetailsResponse getSimDetail(SimDetails simDetails) throws TelecomException;
 
-    Integer addSim(SimDetails simDetails);
+    List<SimDetailsResponse> addSim(SimDetails simDetails);
 
-    void updateSim(SimDetails simDetails) throws TelecomException;
+    SimDetailsResponse updateSim(SimDetails simDetails) throws TelecomException;
 
-    void deleteSim(SimDetails simDetails) throws TelecomException;
+    List<SimDetailsResponse> deleteSim(SimDetails simDetails) throws TelecomException;
 }

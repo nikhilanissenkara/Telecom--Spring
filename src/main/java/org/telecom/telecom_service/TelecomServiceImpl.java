@@ -34,25 +34,25 @@ public class TelecomServiceImpl implements TelecomService {
     }
 
     @Override
-    public SimDetails getSimDetail(SimDetailsRequest simDetailsRequest) throws TelecomException {
+    public SimDetailsResponse getSimDetail(SimDetailsRequest simDetailsRequest) throws TelecomException {
         SimDetails simDetails = telecomModelMapper.convertToEntity(simDetailsRequest);
         return daoImpl.getSimDetail(simDetails);
     }
 
     @Override
-    public Integer addSim(SimDetailsRequest simDetailsRequest) {
+    public List<SimDetailsResponse> addSim(SimDetailsRequest simDetailsRequest) {
         SimDetails simDetails = telecomModelMapper.convertToEntity(simDetailsRequest);
         return daoImpl.addSim(simDetails);
     }
 
     @Override
-    public void updateSim(SimDetailsRequest simDetailsRequest) throws TelecomException {
+    public SimDetailsResponse updateSim(SimDetailsRequest simDetailsRequest) throws TelecomException {
         SimDetails simDetails = telecomModelMapper.convertToEntity(simDetailsRequest);
-        daoImpl.updateSim(simDetails);
+        return daoImpl.updateSim(simDetails);
     }
 
-    public void deleteSim(SimDetailsRequest simDetailsRequest) throws TelecomException {
+    public List<SimDetailsResponse> deleteSim(SimDetailsRequest simDetailsRequest) throws TelecomException {
         SimDetails simDetails = telecomModelMapper.convertToEntity(simDetailsRequest);
-        daoImpl.deleteSim(simDetails);
+        return daoImpl.deleteSim(simDetails);
     }
 }

@@ -1,12 +1,12 @@
 package org.telecom.telecom_Entity;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.telecom.telecomdto.response.SimDetailsResponse;
 
 import javax.persistence.*;
 
 @Entity(name="Sim_Details")
-public class SimDetails
-{
+public class SimDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer simId;

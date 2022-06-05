@@ -22,8 +22,8 @@ public class TelecomController {
 
     //URI path should be small letters or camelcasing, same as java variables
     @GetMapping(value="/status")
-    public SimDetailsResponse simStatus(@RequestBody SimDetailsRequest request) {
-        return telecomService.simStatus(request);
+    public SimDetailsResponse simStatus(@RequestBody SimDetailsRequest simDetailsrequest) {
+        return telecomService.simStatus(simDetailsrequest);
     }
 
     @GetMapping(value="/simDetails")
@@ -32,25 +32,22 @@ public class TelecomController {
     }
 
     @GetMapping(value="/details")
-    public SimDetails getSimDetail(@RequestBody SimDetailsRequest simDetailsRequest) throws TelecomException {
+    public SimDetailsResponse getSimDetail(@RequestBody SimDetailsRequest simDetailsRequest) throws TelecomException {
         return telecomService.getSimDetail(simDetailsRequest);
     }
 
     @PostMapping(value="/add")
-    public int addSim(@RequestBody SimDetailsRequest simDetailsRequest){
-        int simId=telecomService.addSim(simDetailsRequest);
-        return simId;
+    public List<SimDetailsResponse> addSim(@RequestBody SimDetailsRequest simDetailsRequest){
+        return telecomService.addSim(simDetailsRequest);
     }
 
     @PutMapping ("/update")
-    public String updateSim(@RequestBody SimDetailsRequest simDetailsRequest)throws TelecomException {
-        telecomService.updateSim(simDetailsRequest);
-        return "updated";
+    public SimDetailsResponse updateSim(@RequestBody SimDetailsRequest simDetailsRequest)throws TelecomException {
+        return telecomService.updateSim(simDetailsRequest);
     }
 
     @DeleteMapping("/delete")
-    public String deleteSim(@RequestBody SimDetailsRequest simDetailsRequest) throws TelecomException {
-        telecomService.deleteSim(simDetailsRequest);
-        return "deleted";
+    public List<SimDetailsResponse> deleteSim(@RequestBody SimDetailsRequest simDetailsRequest) throws TelecomException {
+        return telecomService.deleteSim(simDetailsRequest);
     }
 }

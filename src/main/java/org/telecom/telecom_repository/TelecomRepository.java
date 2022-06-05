@@ -11,5 +11,5 @@ public interface TelecomRepository extends CrudRepository<SimDetails,Integer> {
     SimDetails findBySimNumberAndServiceNumber(@Param("simNumber") Long simNumber, @Param("serviceNumber") Long serviceNumber);
     **/
     // cannot find column FindBySimNumber
-    SimDetails findBySimNumberOrServiceNumber(Long simNumber, Long serviceNumber);
+    SimDetails findBySimNumberAndServiceNumber(Long simNumber, Long serviceNumber);
 }

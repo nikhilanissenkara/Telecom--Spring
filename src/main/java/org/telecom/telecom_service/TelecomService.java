@@ -12,11 +12,11 @@ public interface TelecomService {
 
     List<SimDetailsResponse> simDetails();
 
-    SimDetails getSimDetail(SimDetailsRequest simDetailsRequest) throws TelecomException;
+    SimDetailsResponse getSimDetail(SimDetailsRequest simDetailsRequest) throws TelecomException;
 
-    Integer addSim(SimDetailsRequest simDetailsRequest);
+    List<SimDetailsResponse> addSim(SimDetailsRequest simDetailsRequest);
 
-    void updateSim(SimDetailsRequest simDetailsRequest) throws TelecomException;
+    SimDetailsResponse updateSim(SimDetailsRequest simDetailsRequest) throws TelecomException;
 
-    void deleteSim(SimDetailsRequest simDetailsRequest) throws TelecomException;
+    List<SimDetailsResponse> deleteSim(SimDetailsRequest simDetailsRequest) throws TelecomException;
 }
