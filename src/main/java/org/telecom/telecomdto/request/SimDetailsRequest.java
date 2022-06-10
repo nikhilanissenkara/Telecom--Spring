@@ -1,8 +1,12 @@
 package org.telecom.telecomdto.request;
 
+import javax.validation.constraints.Min;
+
 public class SimDetailsRequest {
 
     private Integer simId;
+
+   @Min(value=2,message="hi")
     private Long serviceNumber;
     private Long simNumber;
     private String simStatus;

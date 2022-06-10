@@ -1,7 +1,10 @@
 package org.telecom.telecom_service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.telecom.controller.TelecomController;
 import org.telecom.exception.TelecomException;
 import org.telecom.mapper.TelecomModelMapper;
 import org.telecom.telecomdto.request.SimDetailsRequest;
@@ -17,6 +20,7 @@ import java.util.List;
 @Service
 @Transactional
 public class TelecomServiceImpl implements TelecomService {
+    Logger logger = LoggerFactory.getLogger(TelecomController.class);
     @Autowired
     private TelecomDao daoImpl;
 
@@ -25,6 +29,7 @@ public class TelecomServiceImpl implements TelecomService {
     @Override
     public SimDetailsResponse simStatus(SimDetailsRequest simDetailsRequest) {
         SimDetails simDetails = telecomModelMapper.convertToEntity(simDetailsRequest);
+        logger.debug("In service sim status");
         return daoImpl.simStatus(simDetails);
     }
 

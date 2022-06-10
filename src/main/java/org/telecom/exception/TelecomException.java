@@ -1,7 +1,6 @@
 package org.telecom.exception;
 
-public class TelecomException extends Exception {
-    private static final long serialVersionUID=1L;
+public class TelecomException extends RuntimeException {
     public TelecomException(String message){
         super(message);
     }
