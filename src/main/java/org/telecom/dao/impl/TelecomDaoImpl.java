@@ -23,8 +23,12 @@ public class TelecomDaoImpl implements TelecomDao {
 
     @Override
     public SimDetailsResponse simStatus(SimDetails simDetails) {
-        SimDetails simDetailsEntity = telecomRepository.findBySimNumberAndServiceNumber(simDetails.getSimNumber(), simDetails.getServiceNumber());
-        return  new SimDetailsResponse(simDetailsEntity.getSimId(),simDetailsEntity.getServiceNumber(), simDetailsEntity.getSimNumber(), simDetailsEntity.getSimStatus());
+        try {
+            SimDetails simDetailsEntity = telecomRepository.findBySimNumberAndServiceNumber(simDetails.getSimNumber(), simDetails.getServiceNumber());
+            return  new SimDetailsResponse(simDetailsEntity.getSimId(),simDetailsEntity.getServiceNumber(), simDetailsEntity.getSimNumber(), simDetailsEntity.getSimStatus());
+        } catch (Exception e) {
+            throw new TelecomException("simStatus details" + e.getMessage());
+        }
     }
 
 
