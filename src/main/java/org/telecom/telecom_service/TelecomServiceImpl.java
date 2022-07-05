@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telecom.controller.TelecomController;
+import org.telecom.exception.IdNotFoundException;
 import org.telecom.exception.TelecomException;
 import org.telecom.mapper.TelecomModelMapper;
 import org.telecom.telecomdto.request.SimDetailsRequest;
@@ -39,9 +40,14 @@ public class TelecomServiceImpl implements TelecomService {
     }
 
     @Override
-    public SimDetailsResponse getSimDetail(SimDetailsRequest simDetailsRequest) throws TelecomException {
-        SimDetails simDetails = telecomModelMapper.convertToEntity(simDetailsRequest);
-        return daoImpl.getSimDetail(simDetails);
+    public SimDetailsResponse getSimDetail(SimDetailsRequest simDetailsRequest) throws IdNotFoundException {
+        try {
+            SimDetails simDetails = telecomModelMapper.convertToEntity(simDetailsRequest);
+            return daoImpl.getSimDetail(simDetails);
+        }
+        catch(Exception e){
+            throw new IdNotFoundException(e.getMessage());
+        }
     }
 
     @Override

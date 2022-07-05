@@ -1,5 +1,6 @@
 package org.telecom.dao;
 
+import org.telecom.exception.IdNotFoundException;
 import org.telecom.exception.TelecomException;
 import org.telecom.telecom_Entity.SimDetails;
 import org.telecom.telecomdto.response.SimDetailsResponse;
@@ -13,7 +14,7 @@ public interface TelecomDao {
 
     List<SimDetailsResponse> simDetails();
 
-    SimDetailsResponse getSimDetail(SimDetails simDetails) throws TelecomException;
+    SimDetailsResponse getSimDetail(SimDetails simDetails) throws TelecomException, IdNotFoundException;
 
     List<SimDetailsResponse> addSim(SimDetails simDetails);
 

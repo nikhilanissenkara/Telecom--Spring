@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.telecom.exception.IdNotFoundException;
 import org.telecom.exception.TelecomException;
 import org.telecom.telecom_service.TelecomService;
 import org.telecom.telecomdto.request.SimDetailsRequest;
@@ -39,9 +40,14 @@ public class TelecomController {
     }
 
     @GetMapping(value="/details")
-    public SimDetailsResponse getSimDetail(@RequestBody SimDetailsRequest simDetailsRequest) throws TelecomException {
-        logger.debug("Got Simdetail by Id");
-        return telecomService.getSimDetail(simDetailsRequest);
+    public SimDetailsResponse getSimDetail(@RequestBody SimDetailsRequest simDetailsRequest) throws IdNotFoundException {
+        try {
+            logger.debug("Got Simdetail by Id");
+            return telecomService.getSimDetail(simDetailsRequest);
+        }
+        catch(Exception e){
+            throw new IdNotFoundException(e.getMessage());
+        }
     }
 
     @PostMapping(value="/add")

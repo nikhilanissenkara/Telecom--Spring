@@ -28,5 +28,9 @@ public class TelecomControllerAdvice extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
-
+    @ExceptionHandler(IdNotFoundException.class)
+    public ResponseEntity<Object> idNotFoundException(IdNotFoundException e) throws IdNotFoundException{
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Id Not Found", e.getMessage());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
 }

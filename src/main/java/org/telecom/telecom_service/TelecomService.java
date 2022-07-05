@@ -1,5 +1,6 @@
 package org.telecom.telecom_service;
 
+import org.telecom.exception.IdNotFoundException;
 import org.telecom.exception.TelecomException;
 import org.telecom.telecomdto.request.SimDetailsRequest;
 import org.telecom.telecom_Entity.SimDetails;
@@ -12,7 +13,7 @@ public interface TelecomService {
 
     List<SimDetailsResponse> simDetails();
 
-    SimDetailsResponse getSimDetail(SimDetailsRequest simDetailsRequest) throws TelecomException;
+    SimDetailsResponse getSimDetail(SimDetailsRequest simDetailsRequest) throws TelecomException, IdNotFoundException;
 
     List<SimDetailsResponse> addSim(SimDetailsRequest simDetailsRequest);
 

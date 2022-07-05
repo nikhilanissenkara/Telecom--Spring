@@ -2,6 +2,7 @@ package org.telecom.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.telecom.exception.IdNotFoundException;
 import org.telecom.exception.TelecomException;
 import org.telecom.dao.TelecomDao;
 import org.telecom.mapper.TelecomModelMapper;
@@ -41,9 +42,9 @@ public class TelecomDaoImpl implements TelecomDao {
     }
 
     @Override
-    public SimDetailsResponse getSimDetail(SimDetails simDetails) throws TelecomException {
+    public SimDetailsResponse getSimDetail(SimDetails simDetails) throws IdNotFoundException {
         Optional<SimDetails> optional=telecomRepository.findById(simDetails.getSimId());
-        SimDetails simDetailsEntity =optional.orElseThrow(()-> new TelecomException("not found"));
+        SimDetails simDetailsEntity =optional.orElseThrow(()-> new IdNotFoundException("Id not Found"));
         return new SimDetailsResponse(simDetailsEntity.getSimId(),simDetailsEntity.getServiceNumber(), simDetailsEntity.getSimNumber(), simDetailsEntity.getSimStatus());
     }
 
